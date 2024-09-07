@@ -30,6 +30,6 @@
 *.exe
 *.out
 *.app
-~$ Дивер.docx
 .DS_Store
 *.ex5
+~*.doc*
