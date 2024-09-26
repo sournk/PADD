@@ -33,3 +33,4 @@
 .DS_Store
 *.ex5
 ~*.doc*
+~$*.xlsx
