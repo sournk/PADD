@@ -2,6 +2,8 @@
 //|                                                CDKSymbolInfo.mqh |
 //|                                                  Denis Kislitsyn |
 //|                                             https://kislitsyn.me |
+//| 2024-10-13:
+//|   [+] PriceToString(const double _price);
 //| 2024-06-26:
 //|   [+] AddPrice() funcs
 //+------------------------------------------------------------------+
@@ -20,6 +22,8 @@ public:
 
   int                 PriceToPoints(const double aPrice);                              // Convert aPrice to price value for current Symbol
   double              PointsToPrice(const int aPoint);                                 // Convert aPoint to points for current Symbol
+  
+  string              PriceToString(const double _price);                              // Price format with sym digits "%0.[Digits]f"
   
   double              GetPriceToOpen(const ENUM_POSITION_TYPE aPositionDirection);     // Returns market price Ask or Bid to OPEN new pos with aPositionDirection dir
   double              GetPriceToClose(const ENUM_POSITION_TYPE aPositionDirection);    // Returns market price Ask or Bid to CLOSE new pos with aPositionDirection dir
@@ -80,6 +84,15 @@ double CDKSymbolInfo::PointsToPrice(const int aPoint) {
   RefreshRates();
   
   return(NormalizeDouble(aPoint * this.Point(), this.Digits()));
+}
+
+
+//+------------------------------------------------------------------+
+//| Make price format with Sym digits
+//+------------------------------------------------------------------+
+string CDKSymbolInfo::PriceToString(const double _price) {
+  string fmt = "%0." + IntegerToString(this.Digits()) + "f";
+  return StringFormat(fmt, _price);
 }
 
 //+------------------------------------------------------------------+
